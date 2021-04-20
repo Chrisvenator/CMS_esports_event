@@ -17,10 +17,21 @@ class HomeController extends AbstractController {
         return $this->render('home/index.html.twig', $data);
     }
 
-    #[Route('/match', name: 'home')]
-    public function match(): Response {
+    #[Route('/match/{team1}-vs-{team2}', name: 'home')]
+    public function match(string $team1, string $team2, Matches $matchesService): Response {
 
-        return $this->render('home/index.html.twig', []);
+        $data = $matchesService->getMatches();
+        foreach ($data as $match) {
+//            return new Response(strtolower($match['teams'][1]["name"]) . " xx " . $team2);
+            if (strtolower($match['teams'][0]["name"]) == strtolower($team1) && strtolower($match['teams'][1]["name"]) == strtolower($team2) || strtolower($match['teams'][1]["name"]) == strtolower($team1) && strtolower($match['teams'][2]["name"]) == strtolower($team2)) {
+                $erg = $match;
+            }
+        }
+        if (!isset($erg)) return new Response("Match not found");
+
+        $tmp["matches"][0] = $erg;
+//        return new Response(json_encode($data));
+        return $this->render('home/index.html.twig', $tmp);
     }
 
 }
