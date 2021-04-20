@@ -2,6 +2,7 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 
+
 {% block stylesheets %}
     <style>
         .example-wrapper {
@@ -16,19 +17,38 @@
             padding: 2px 6px;
         }
 
+        .d-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+            width: 100%;
+        }
+
+        .mb {
+            margin-bottom: 1rem;
+        }
+
+        .place-center {
+            display: grid;
+            place-items: center;
+        }
+
         .team {
             padding-left: 40px;
         }
 
         .card {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin: 1.5rem;
+            border-radius: .5rem;
+            padding: 1rem;
         }
 
         .card:hover {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
         }
 
-        tr{
+        tr {
             border-bottom: 1px solid #000000
         }
     </style>
@@ -36,53 +56,54 @@
 
 {% block body %}
 
-    <div class="example-wrapper">
+    <main class="example-wrapper">
         {% for match in matches %}
-            <div class="card">
+            <div class="card place-center">
                 <h1>{{ match.teams[0].name }} vs {{ match.teams[1].name }}</h1>
                 <table>
                     <tr>
                         <td>Date</td>
-                        <td>{{ match.date }}</td>
+                        <td><time>{{ match.date }}</time></td>
                     </tr>
                     <tr>
                         <td>Time</td>
-                        <td>{{ match.time }}</td>
+                        <td>
+                            <time>{{ match.time }}</time>
+                        </td>
                     </tr>
                     <tr>
                         <td>Mode</td>
-                        <td>{{ match.time }}</td>
+                        <td>{{ match.mode }}</td>
                     </tr>
                     <tr>
                         <td>Map</td>
                         <td>{{ match.map }}</td>
                     </tr>
                 </table>
-                <a src="{{ match.link }}">Video Link</a>
-                <div>
+                <a href="{{ match.link }}">Video Link</a>
+                <div class="d-grid place-center">
                     {% for team in match.teams %}
                         <div>
                             <h2>{{ team.name }}</h2>
-                            {% for member in team.members %}
-                                <table>
-                                    <tr>
-                                        <td>Name:</td>
+                            <table>
+                                <tr class="mb">
+                                    <th>Name</th>
+                                    <th>Herkunft</th>
+                                </tr>
+                                {% for member in team.members %}
+                                    <tr class="mb">
                                         <td>{{ member.name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Herkunft</td>
                                         <td>{{ member.origin }}</td>
                                     </tr>
-                                </table>
-                            {% endfor %}
+                                {% endfor %}
+                            </table>
                         </div>
                     {% endfor %}
                 </div>
-                <br>
             </div>
         {% endfor %}
 
-    </div>
+    </main>
 {% endblock %}
 
 {% block script %}
@@ -120,6 +141,5 @@
                 "availability": "https://schema.org/InStock"
             }
         }
-    </script>
     </script>
 {% endblock %}

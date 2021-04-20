@@ -10,9 +10,9 @@ class Matches {
             [
                 "mode" => "Best of 3",
                 "map" => "",
-                "date" => "Heute",
-                "time" => "Abend",
-                "link" => "twitch.tv",
+                "date" => "21.April.2021",
+                "time" => "09:30",
+                "link" => "https://www.hltv.org/live?matchId=2347974",
                 "teams" => [
                     [
                         "name" => "Lilmix",
@@ -133,11 +133,11 @@ class Matches {
                 "mode" => "Best of 1",
                 "map" => "",
                 "date" => "21.April.2021",
-                "time" => "...",
+                "time" => "13:00",
                 "link" => "https://www.hltv.org/live?matchId=2347953",
                 "teams" => [
                     [
-                        "name" => "R!OT",
+                        "name" => "Entropiq",
                         "members" => [
                             [
                                 "name" => "AJTT",
